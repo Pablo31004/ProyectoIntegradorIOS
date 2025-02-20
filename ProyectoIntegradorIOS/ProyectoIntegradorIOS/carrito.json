@@ -1,0 +1,32 @@
+{
+  "id_carrito": 9876,
+  "usuario": {
+    "id_usuario": 6789,
+    "nombre": "Alberto Pérez"
+  },
+  "items": [
+    {
+      "id_producto": 4,
+      "nombre": "Pizza Pepperoni",
+      "cantidad": 1,
+      "precio_unitario": 10.00,
+      "subtotal": 10.00
+    },
+    {
+      "id_producto": 5,
+      "nombre": "Bacon Cheese Fries",
+      "cantidad": 2,
+      "precio_unitario": 4.50,
+      "subtotal": 9.00
+    },
+    {
+      "id_producto": 6,
+      "nombre": "Hot Dog Tradicional",
+      "cantidad": 1,
+      "precio_unitario": 3.50,
+      "subtotal": 3.50
+    }
+  ],
+  "total": 22.50
+}
+
