@@ -9,12 +9,12 @@ import SwiftUI
 
 @main
 struct ProyectoIntegradorIOSApp: App {
-    @StateObject var authViewModel = AuthViewModel() // Creamos la instancia del ViewModel
+    @StateObject var authViewModel = AuthViewModel() // Se crea la instancia global
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(authViewModel) // Inyectamos el EnvironmentObject
+                .environmentObject(authViewModel) // Inyección en el entorno
         }
     }
 }
