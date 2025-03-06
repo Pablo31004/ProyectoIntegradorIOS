@@ -15,7 +15,7 @@ struct TiendaView: View {
                         VStack(alignment: .leading) {
                             Text(producto.nombre)
                                 .font(.headline)
-                            Text("$\(String(format: "%.2f", producto.precio))")
+                            Text("€\(String(format: "%.2f", producto.precio))")
                                 .font(.subheadline)
                         }
                     }

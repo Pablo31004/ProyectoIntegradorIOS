@@ -33,7 +33,7 @@ struct CarritoView: View {
                             .font(.headline)
                         Spacer()
                         let total = authViewModel.carrito.reduce(0) { $0 + $1.producto.precio * Double($1.cantidad) }
-                        Text("$\(String(format: "%.2f", total))")
+                        Text("€\(String(format: "%.2f", total))")
                             .font(.headline)
                     }
                     .padding()

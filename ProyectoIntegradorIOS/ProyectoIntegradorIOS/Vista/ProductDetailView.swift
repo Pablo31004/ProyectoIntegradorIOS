@@ -21,7 +21,7 @@ struct ProductDetailView: View {
                 .frame(height: 200)
             Text(producto.nombre)
                 .font(.largeTitle)
-            Text("$\(String(format: "%.2f", producto.precio))")
+            Text("€\(String(format: "%.2f", producto.precio))")
                 .font(.title2)
             Stepper("Cantidad: \(cantidad)", value: $cantidad, in: 1...10)
                 .padding()
@@ -32,7 +32,7 @@ struct ProductDetailView: View {
                 HStack {
                     Text("Agregar al Carrito")
                     Spacer()
-                    Text("$\(String(format: "%.2f", producto.precio * Double(cantidad)))")
+                    Text("€\(String(format: "%.2f", producto.precio * Double(cantidad)))")
                 }
                 .padding()
                 .background(Color.green)
