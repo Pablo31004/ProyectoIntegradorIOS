@@ -39,6 +39,17 @@ struct LoginView: View {
                         .padding(.top, 5)
                 }
                 
+                Toggle(isOn: Binding(
+                    get: {
+                        authViewModel.usuarioAutenticado?.suscritoNewsletter ?? false
+                    },
+                    set: { _ in
+                        authViewModel.toggleNewsletter()
+                    }
+                )) {
+                    Text("Aceptar terminos y condiciones")
+                }
+                
                 Button(action: {
                     authViewModel.iniciarSesion(email: email, contraseña: contraseña)
                 }) {
