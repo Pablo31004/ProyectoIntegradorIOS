@@ -20,6 +20,7 @@ struct LoginView: View {
                         .frame(width: 400, height: 400)
                         .scaledToFit()
                         .scaledToFill()
+                        .padding()
                 }
                 TextField("Email", text: $email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
