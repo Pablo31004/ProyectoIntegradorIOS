@@ -18,7 +18,7 @@ struct Usuario: Identifiable {
 }
 
 // Modelo de Producto
-struct Producto: Identifiable {
+struct Producto: Identifiable, Codable {
     let id = UUID()
     let nombre: String
     let precio: Double
@@ -45,8 +45,9 @@ class AuthViewModel: ObservableObject {
     @Published var usuarioAutenticado: Usuario? = nil
     @Published var mensajeError: String = ""
     
-    @Published var pedidos: [Pedido] = []          // Historial de pedidos
-    @Published var carrito: [CarritoItem] = []       // Items del carrito
+    @Published var pedidos: [Pedido] = []       // Historial de pedidos
+    @Published var carrito: [CarritoItem] = []  // Items del carrito
+    @Published var productos: [Producto] = []   // Lista de productos desde JSON
     
     // Lista de usuarios simulada
     private let usuariosRegistrados = [
@@ -54,15 +55,26 @@ class AuthViewModel: ObservableObject {
         Usuario(email: "usuario2@mail.com", contraseña: "abcdef", nombre: "Usuario Dos", direccion: "Avenida Siempre Viva 742", suscritoNewsletter: false)
     ]
     
-    // Lista simulada de productos (normalmente vendría de un JSON o similar)
-    let productos = [
-        Producto(nombre: "Hamburguesa", precio: 8.50, imageName: "Hamburguesa"), // Debes agregar imágenes en Assets con este nombre
-        Producto(nombre: "Pizza", precio: 10.00, imageName: "PizzaPeperoni"),
-        Producto(nombre: "Nuggets de Pollo", precio: 6.50, imageName: "NuggetsPollo"),
-        Producto(nombre: "Hot Dog", precio: 6.50, imageName: "HotDog"),
-        Producto(nombre: "Bacon Cheese Fries", precio: 7.50, imageName: "BaconCheeseFries"),
-        Producto(nombre: "Tacos de Pollos", precio: 8.50, imageName: "TacosPollo")
-    ]
+    // Inicializador que carga productos desde JSON
+    init() {
+        cargarProductosDesdeJSON()
+    }
+
+    // Función para cargar productos desde JSON
+    func cargarProductosDesdeJSON() {
+        guard let url = Bundle.main.url(forResource: "datos", withExtension: "json") else {
+            print("No se encontró el archivo JSON")
+            return
+        }
+        
+        do {
+            let data = try Data(contentsOf: url)
+            let decodedData = try JSONDecoder().decode([String: [Producto]].self, from: data)
+            self.productos = decodedData["platos"] ?? []
+        } catch {
+            print("Error al cargar los productos: \(error)")
+        }
+    }
     
     // Función de inicio de sesión
     func iniciarSesion(email: String, contraseña: String) {
@@ -101,7 +113,6 @@ class AuthViewModel: ObservableObject {
     
     // Función para agregar un producto al carrito
     func agregarAlCarrito(producto: Producto, cantidad: Int) {
-        // Para simplificar, se añade directamente
         let nuevoItem = CarritoItem(producto: producto, cantidad: cantidad)
         carrito.append(nuevoItem)
     }
