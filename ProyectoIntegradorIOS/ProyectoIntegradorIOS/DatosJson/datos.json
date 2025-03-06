@@ -1,101 +1,34 @@
-
+{
   "platos": [
     {
       "nombre": "Hamburguesa Clásica",
-      "ingredientes": [
-        "Pan de hamburguesa",
-        "Carne de res (150g)",
-        "Queso cheddar",
-        "Lechuga",
-        "Tomate",
-        "Cebolla",
-        "Salsa de mayonesa y ketchup"
-      ],
-      "valor_nutricional": {
-        "calorias": 550,
-        "proteinas": 25,
-        "carbohidratos": 40,
-        "grasas": 30
-      }
-    },
-    {
-      "nombre": "Hot Dog Tradicional",
-      "ingredientes": [
-        "Pan para hot dog",
-        "Salchicha de cerdo",
-        "Mostaza",
-        "Ketchup",
-        "Cebolla picada",
-        "Pepinillos"
-      ],
-      "valor_nutricional": {
-        "calorias": 400,
-        "proteinas": 15,
-        "carbohidratos": 35,
-        "grasas": 20
-      }
+      "precio": 8.50,
+      "imageName": "Hamburguesa"
     },
     {
       "nombre": "Pizza Pepperoni",
-      "ingredientes": [
-        "Masa de pizza",
-        "Salsa de tomate",
-        "Queso mozzarella",
-        "Pepperoni"
-      ],
-      "valor_nutricional": {
-        "calorias": 320,
-        "proteinas": 12,
-        "carbohidratos": 36,
-        "grasas": 14
-      }
+      "precio": 10.00,
+      "imageName": "PizzaPeperoni"
     },
     {
-      "nombre": "Papas Fritas (Porción Mediana)",
-      "ingredientes": [
-        "Papas",
-        "Aceite para freír",
-        "Sal"
-      ],
-      "valor_nutricional": {
-        "calorias": 365,
-        "proteinas": 4,
-        "carbohidratos": 50,
-        "grasas": 17
-      }
+      "nombre": "Nuggets de Pollo",
+      "precio": 6.50,
+      "imageName": "NuggetsPollo"
+    },
+    {
+      "nombre": "Hot Dog Tradicional",
+      "precio": 6.50,
+      "imageName": "HotDog"
+    },
+    {
+      "nombre": "Bacon Cheese Fries",
+      "precio": 7.50,
+      "imageName": "BaconCheeseFries"
     },
     {
       "nombre": "Tacos de Pollo",
-      "ingredientes": [
-        "Tortilla de maíz",
-        "Pollo desmenuzado",
-        "Lechuga",
-        "Queso rallado",
-        "Salsa",
-        "Cebolla"
-      ],
-      "valor_nutricional": {
-        "calorias": 300,
-        "proteinas": 20,
-        "carbohidratos": 30,
-        "grasas": 10
-      }
-    },
-    {
-      "nombre": "Nuggets de Pollo (6 unidades)",
-      "ingredientes": [
-        "Pollo molido",
-        "Pan rallado",
-        "Aceite para freír",
-        "Especias"
-      ],
-      "valor_nutricional": {
-        "calorias": 420,
-        "proteinas": 20,
-        "carbohidratos": 25,
-        "grasas": 25
-      }
+      "precio": 8.50,
+      "imageName": "TacosPollo"
     }
   ]
-
-
+}

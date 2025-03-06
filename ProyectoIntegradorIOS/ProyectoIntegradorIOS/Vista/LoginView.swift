@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-
 struct LoginView: View {
     @State private var email = ""
     @State private var contraseña = ""
@@ -15,10 +14,13 @@ struct LoginView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
-                Text("Bienvenido a VirtualBites")
-                    .font(.title)
-                    .padding(.bottom, 20)
-                
+                VStack{
+                    Image("logo")
+                        .resizable()
+                        .frame(width: 400, height: 400)
+                        .scaledToFit()
+                        .scaledToFill()
+                }
                 TextField("Email", text: $email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.horizontal)
@@ -53,7 +55,6 @@ struct LoginView: View {
         }
     }
 }
-
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView().environmentObject(AuthViewModel())
