@@ -56,8 +56,12 @@ class AuthViewModel: ObservableObject {
     
     // Lista simulada de productos (normalmente vendría de un JSON o similar)
     let productos = [
-        Producto(nombre: "Hamburguesa", precio: 8.50, imageName: "hamburguesa"), // Debes agregar imágenes en Assets con este nombre
-        Producto(nombre: "Pizza", precio: 10.00, imageName: "pizza")
+        Producto(nombre: "Hamburguesa", precio: 8.50, imageName: "Hamburguesa"), // Debes agregar imágenes en Assets con este nombre
+        Producto(nombre: "Pizza", precio: 10.00, imageName: "PizzaPeperoni"),
+        Producto(nombre: "Nuggets de Pollo", precio: 6.50, imageName: "NuggetsPollo"),
+        Producto(nombre: "Hot Dog", precio: 6.50, imageName: "HotDog"),
+        Producto(nombre: "Bacon Cheese Fries", precio: 7.50, imageName: "BaconCheeseFries"),
+        Producto(nombre: "Tacos de Pollos", precio: 8.50, imageName: "TacosPollo")
     ]
     
     // Función de inicio de sesión
