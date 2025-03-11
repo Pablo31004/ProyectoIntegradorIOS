@@ -25,6 +25,12 @@ struct CarritoView: View {
                                 Text(item.producto.nombre)
                                 Spacer()
                                 Text("x\(item.cantidad)")
+                                Button(action: {
+                                    authViewModel.eliminarDelCarrito(item: item)
+                                }) {
+                                    Image(systemName: "trash")
+                                        .foregroundColor(.red)
+                                }
                             }
                         }
                     }

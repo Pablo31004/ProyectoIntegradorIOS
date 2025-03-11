@@ -116,4 +116,10 @@ class AuthViewModel: ObservableObject {
         let nuevoItem = CarritoItem(producto: producto, cantidad: cantidad)
         carrito.append(nuevoItem)
     }
+    
+    // Función para eliminar un producto del carrito
+    func eliminarDelCarrito(item: CarritoItem) {
+        carrito.removeAll { $0.id == item.id }
+    }
+
 }
