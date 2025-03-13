@@ -29,6 +29,26 @@
       "nombre": "Tacos de Pollo",
       "precio": 8.50,
       "imageName": "TacosPollo"
+    },
+    {
+      "nombre": "Bocadillo de Calamares",
+      "precio": 5.50,
+      "imageName": "BocadilloCalamares"
+    },
+    {
+      "nombre": "Tortilla de Patatas",
+      "precio": 7.50,
+      "imageName": "TortillaPatatas"
+    },
+    {
+      "nombre": "Pasta Carbonara",
+      "precio": 12.50,
+      "imageName": "PastaCarbonara"
+    },
+    {
+      "nombre": "Pizza Barbacoa",
+      "precio": 8.50,
+      "imageName": "PizzaBarbacoa"
     }
   ]
 }

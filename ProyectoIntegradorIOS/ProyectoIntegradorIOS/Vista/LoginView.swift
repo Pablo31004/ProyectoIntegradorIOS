@@ -6,15 +6,17 @@
 //
 
 import SwiftUI
+
 struct LoginView: View {
     @State private var email = ""
     @State private var contraseña = ""
+    @State private var aceptaTerminos = false  // Nuevo estado para el Toggle
     @EnvironmentObject var authViewModel: AuthViewModel
     
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
-                VStack{
+                VStack {
                     Image("logo")
                         .resizable()
                         .frame(width: 400, height: 400)
@@ -22,6 +24,7 @@ struct LoginView: View {
                         .scaledToFill()
                         .padding()
                 }
+                
                 TextField("Email", text: $email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.horizontal)
@@ -39,34 +42,32 @@ struct LoginView: View {
                         .padding(.top, 5)
                 }
                 
-                Toggle(isOn: Binding(
-                    get: {
-                        authViewModel.usuarioAutenticado?.suscritoNewsletter ?? false
-                    },
-                    set: { _ in
-                        authViewModel.toggleNewsletter()
-                    }
-                )) {
-                    Text("Aceptar terminos y condiciones")
+                Toggle(isOn: $aceptaTerminos) {
+                    Text("Aceptar términos y condiciones")
                 }
+                .padding(.horizontal)
                 
                 Button(action: {
-                    authViewModel.iniciarSesion(email: email, contraseña: contraseña)
+                    if aceptaTerminos {
+                        authViewModel.iniciarSesion(email: email, contraseña: contraseña)
+                    }
                 }) {
                     Text("Iniciar Sesión")
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.blue)
+                        .background(aceptaTerminos ? Color.blue : Color.gray) // Cambio de color según el estado
                         .foregroundColor(.white)
                         .cornerRadius(10)
                         .padding(.horizontal)
                 }
+                .disabled(!aceptaTerminos) // Deshabilita el botón si no se aceptan términos
                 
                 Spacer()
             }
         }
     }
 }
+
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView().environmentObject(AuthViewModel())
