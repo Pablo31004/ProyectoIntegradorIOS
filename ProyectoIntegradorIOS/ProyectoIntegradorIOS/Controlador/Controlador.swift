@@ -49,9 +49,6 @@ class AuthViewModel: ObservableObject {
     @Published var carrito: [CarritoItem] = []  // Items del carrito
     @Published var productos: [Producto] = []   // Lista de productos desde JSON
 
-    // Clave para almacenar dirección en UserDefaults
-    private let DireccionUsuario = "direccionUsuario"
-
     // Lista de usuarios simulada
     private let usuariosRegistrados = [
         Usuario(email: "usuario1@mail.com", contraseña: "123", nombre: "Usuario Uno", direccion: "Calle Falsa 123", suscritoNewsletter: false),
@@ -79,12 +76,15 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    // Función de inicio de sesión
+    // Función de inicio de sesión (cada usuario carga su propia dirección)
     func iniciarSesion(email: String, contraseña: String) {
         if let usuario = usuariosRegistrados.first(where: { $0.email == email && $0.contraseña == contraseña }) {
+            // Clave única para almacenar la dirección de cada usuario
+            let claveDireccion = "direccion_\(usuario.email)"
+
             // Cargar dirección desde UserDefaults (si existe)
-            let direccionGuardada = UserDefaults.standard.string(forKey: DireccionUsuario) ?? usuario.direccion
-            
+            let direccionGuardada = UserDefaults.standard.string(forKey: claveDireccion) ?? usuario.direccion
+
             usuarioAutenticado = Usuario(
                 email: usuario.email,
                 contraseña: usuario.contraseña,
@@ -92,7 +92,7 @@ class AuthViewModel: ObservableObject {
                 direccion: direccionGuardada,
                 suscritoNewsletter: usuario.suscritoNewsletter
             )
-            
+
             mensajeError = ""
         } else {
             mensajeError = "Credenciales incorrectas"
@@ -137,7 +137,7 @@ class AuthViewModel: ObservableObject {
         carrito.removeAll { $0.id == item.id }
     }
     
-    // Guardar dirección en el modelo y en UserDefaults
+    // Guardar dirección en el modelo y en UserDefaults de forma independiente
     func actualizarDireccion(_ nuevaDireccion: String) {
         if let usuario = usuarioAutenticado {
             usuarioAutenticado = Usuario(
@@ -147,9 +147,12 @@ class AuthViewModel: ObservableObject {
                 direccion: nuevaDireccion,
                 suscritoNewsletter: usuario.suscritoNewsletter
             )
-            
+
+            // Clave única para cada usuario
+            let claveDireccion = "direccion_\(usuario.email)"
+
             // Guardar en UserDefaults para persistencia
-            UserDefaults.standard.set(nuevaDireccion, forKey: DireccionUsuario)
+            UserDefaults.standard.set(nuevaDireccion, forKey: claveDireccion)
         }
     }
 }
