@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// Modelo de Usuario extendido
+// MARK: - Modelo de Usuario extendido
 struct Usuario: Identifiable {
     let id = UUID()
     let email: String
@@ -40,7 +40,7 @@ struct CarritoItem: Identifiable {
     let cantidad: Int
 }
 
-// ViewModel para Autenticación, Pedidos y Carrito
+// MARK: - ViewModel para Autenticación, Pedidos y Carrito
 class AuthViewModel: ObservableObject {
     @Published var usuarioAutenticado: Usuario? = nil
     @Published var mensajeError: String = ""
@@ -48,7 +48,10 @@ class AuthViewModel: ObservableObject {
     @Published var pedidos: [Pedido] = []       // Historial de pedidos
     @Published var carrito: [CarritoItem] = []  // Items del carrito
     @Published var productos: [Producto] = []   // Lista de productos desde JSON
-    
+
+    // Clave para almacenar dirección en UserDefaults
+    private let DireccionUsuario = "direccionUsuario"
+
     // Lista de usuarios simulada
     private let usuariosRegistrados = [
         Usuario(email: "usuario1@mail.com", contraseña: "123", nombre: "Usuario Uno", direccion: "Calle Falsa 123", suscritoNewsletter: false),
@@ -79,7 +82,17 @@ class AuthViewModel: ObservableObject {
     // Función de inicio de sesión
     func iniciarSesion(email: String, contraseña: String) {
         if let usuario = usuariosRegistrados.first(where: { $0.email == email && $0.contraseña == contraseña }) {
-            usuarioAutenticado = usuario
+            // Cargar dirección desde UserDefaults (si existe)
+            let direccionGuardada = UserDefaults.standard.string(forKey: DireccionUsuario) ?? usuario.direccion
+            
+            usuarioAutenticado = Usuario(
+                email: usuario.email,
+                contraseña: usuario.contraseña,
+                nombre: usuario.nombre,
+                direccion: direccionGuardada,
+                suscritoNewsletter: usuario.suscritoNewsletter
+            )
+            
             mensajeError = ""
         } else {
             mensajeError = "Credenciales incorrectas"
@@ -91,14 +104,16 @@ class AuthViewModel: ObservableObject {
         usuarioAutenticado = nil
     }
     
-    // Alterna el estado de newsletter
+    // Alternar el estado de suscripción a Newsletter
     func toggleNewsletter() {
         if let usuario = usuarioAutenticado {
-            usuarioAutenticado = Usuario(email: usuario.email,
-                                          contraseña: usuario.contraseña,
-                                          nombre: usuario.nombre,
-                                          direccion: usuario.direccion,
-                                          suscritoNewsletter: !usuario.suscritoNewsletter)
+            usuarioAutenticado = Usuario(
+                email: usuario.email,
+                contraseña: usuario.contraseña,
+                nombre: usuario.nombre,
+                direccion: usuario.direccion,
+                suscritoNewsletter: !usuario.suscritoNewsletter
+            )
         }
     }
     
@@ -121,5 +136,20 @@ class AuthViewModel: ObservableObject {
     func eliminarDelCarrito(item: CarritoItem) {
         carrito.removeAll { $0.id == item.id }
     }
-
+    
+    // Guardar dirección en el modelo y en UserDefaults
+    func actualizarDireccion(_ nuevaDireccion: String) {
+        if let usuario = usuarioAutenticado {
+            usuarioAutenticado = Usuario(
+                email: usuario.email,
+                contraseña: usuario.contraseña,
+                nombre: usuario.nombre,
+                direccion: nuevaDireccion,
+                suscritoNewsletter: usuario.suscritoNewsletter
+            )
+            
+            // Guardar en UserDefaults para persistencia
+            UserDefaults.standard.set(nuevaDireccion, forKey: DireccionUsuario)
+        }
+    }
 }
