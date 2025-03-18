@@ -73,7 +73,7 @@ struct CarritoItemJSON: Codable {
     let subtotal: Double
 }
 
-// MARK: - Clase Controlador para Conectar la "Base de Datos" (JSON) con la Aplicación
+//Clase Controlador para Conectar la "Base de Datos" (JSON) con la Aplicación
 
 class Controlador {
     // Usamos un singleton para poder acceder fácilmente desde cualquier parte de la app.

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK: - Modelo de Usuario extendido
+//Modelo de Usuario extendido
 struct Usuario: Identifiable {
     let id = UUID()
     let email: String
@@ -40,7 +40,7 @@ struct CarritoItem: Identifiable {
     let cantidad: Int
 }
 
-// MARK: - ViewModel para Autenticación, Pedidos y Carrito
+//ViewModel para Autenticación, Pedidos y Carrito
 class AuthViewModel: ObservableObject {
     @Published var usuarioAutenticado: Usuario? = nil
     @Published var mensajeError: String = ""
